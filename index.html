@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnathan Pereira | Portfolio</title>
+    <!-- Fonte corporativa limpa do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset e Variáveis (Light Mode Padrão) */
+        :root {
+            --bg-color: #f8f9fa;
+            --container-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --accent-color: #0077B5;
+            --border-color: #e5e7eb;
+        }
+
+        /* --- DARK MODE AUTOMÁTICO --- */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --container-bg: #1e1e1e;
+                --text-main: #e4e6eb;
+                --text-muted: #b0b3b8;
+                --accent-color: #4da6ff;
+                --border-color: #3a3b3c;
+            }
+
+            /* Adaptação para manter o SVG do GitHub legível no tema escuro */
+            .stats-container img {
+                background-color: #f8f9fa;
+                border-radius: 8px;
+                padding: 10px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Tipografia e Alinhamento */
+        .text-center { text-align: center; }
+        
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        .subtitle {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* Links de Idioma */
+        .lang-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .lang-links a:hover {
+            color: #005582;
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .lang-links a:hover {
+                color: #80c4ff;
+            }
+        }
+
+        /* Badges e Imagens */
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .badges-container img {
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .badges-container a:hover img {
+            transform: translateY(-2px);
+        }
+
+        /* Divisórias (Linhas horizontais) */
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 40px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Seções de Perfil */
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Estatísticas do GitHub */
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stats-container img {
+            max-width: 100%;
+            height: auto;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Responsividade para telas maiores */
+        @media (min-width: 768px) {
+            .stats-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <!-- Cabeçalho -->
+        <header class="text-center">
+            <h1>Hello, World! I'm Johnathan Pereira</h1>
+            <div class="subtitle">
+                <p>Information Technology | Systems Development<br>
+                Tecnologia da Informação | Desenvolvimento de Sistemas</p>
+            </div>
+            
+            <p class="lang-links">
+                <i>Choose your language / Escolha seu idioma:</i><br>
+                <a href="#english">English</a> | <a href="#portuguese">Português</a>
+            </p>
+        </header>
+
+        <hr>
+
+        <!-- Tech Stack -->
+        <section class="text-center">
+            <h3>Tech Stack & Tools<br>Tecnologias & Ferramentas</h3>
+            <div class="badges-container">
+                <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows" />
+                <img src="https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white" alt="Google Chrome" />
+                <img src="https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+                <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+                <img src="https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white" alt="Markdown" />
+                <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
+                <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
+                <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
+                <img src="https://img.shields.io/badge/Notepad++-90E59A?style=for-the-badge&logo=notepadplusplus&logoColor=black" alt="Notepad++" />
+                <img src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white" alt="Cloudflare" />
+                <img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="PowerShell" />
+                <img src="https://img.shields.io/badge/WSL-0a97f5?style=for-the-badge&logo=linux&logoColor=white" alt="WSL" />
+                <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
+                <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash" />
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Repositórios em Destaque -->
+        <section class="text-center">
+            <h2>Featured Repositories<br>Repositórios em Destaque</h2>
+            <div class="badges-container">
+                <a href="https://github.com/JohnathanWellPer/univesp-tecnologia_da_informacao" target="_blank">
+                    <img src="https://img.shields.io/badge/UNIVESP-Bachelor_of_Information_Technology-100000?style=for-the-badge&logo=github&logoColor=white" alt="UNIVESP Portfolio">
+                </a>
+                <a href="https://github.com/JohnathanWellPer/etec-desenvolvimento_de_sistemas" target="_blank">
+                    <img src="https://img.shields.io/badge/ETEC-Systems_Development_Technician-100000?style=for-the-badge&logo=github&logoColor=white" alt="ETEC Portfolio">
+                </a>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Seção English -->
+        <section id="english" class="profile-section">
+            <h2>Profile</h2>
+            <p><strong>Education:</strong></p>
+            <ul>
+                <li><strong>Bachelor of Information Technology</strong> - UNIVESP</li>
+                <li><strong>Technical Degree in Systems Development</strong> - ETEC</li>
+                <li><strong>Technical Degree in Commerce</strong> - ETEC</li>
+                <li><strong>Foundations of Generative AI (Google Cloud)</strong> - SENAI</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Seção Portuguese -->
+        <section id="portuguese" class="profile-section">
+            <h2>Perfil</h2>
+            <p><strong>Formação Acadêmica:</strong></p>
+            <ul>
+                <li><strong>Bacharelado em Tecnologia da Informação</strong> - UNIVESP</li>
+                <li><strong>Técnico em Desenvolvimento de Sistemas</strong> - ETEC</li>
+                <li><strong>Técnico em Comércio</strong> - ETEC</li>
+                <li><strong>Fundamentos de Inteligência Artificial Generativa (Google Cloud)</strong> - SENAI</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Estatísticas -->
+        <section class="text-center">
+            <h2>GitHub Stats<br>Estatísticas do GitHub</h2>
+            <div class="stats-container">
+                <img src="https://github-readme-stats.vercel.app/api?username=JohnathanWellPer&show_icons=true&theme=transparent&hide_border=true&title_color=0077B5&icon_color=0077B5&text_color=333333" alt="GitHub Stats" />
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=JohnathanWellPer&layout=compact&theme=transparent&hide_border=true&title_color=0077B5&text_color=333333" alt="Top Languages" />
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Contato -->
+        <section class="text-center">
+            <h3>Contact<br>Contato</h3>
+            <div class="badges-container">
+                <a href="https://www.linkedin.com/in/johnathanwellper/" target="_blank">
+                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                </a>
+                <a href="mailto:johnathanwellper@gmail.com">
+                    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+                </a>
+                <a href="https://wa.me/5519999871108" target="_blank">
+                    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script para Rolagem Suave -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
