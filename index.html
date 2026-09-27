@@ -7,36 +7,33 @@
     <!-- Fonte corporativa limpa do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS Reset e Variáveis (Light Mode Padrão) */
+        /* CSS Reset e Variáveis de Tema */
         :root {
-            --bg-color: #f8f9fa;
-            --container-bg: #ffffff;
+            --bg-main: #f4f7f9;
+            --bg-card: #ffffff;
+            --sidebar-bg: #ffffff;
             --text-main: #333333;
             --text-muted: #666666;
             --accent-color: #0077B5;
             --border-color: #e5e7eb;
+            --sidebar-width: 280px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        /* --- DARK MODE AUTOMÁTICO --- */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --container-bg: #1e1e1e;
-                --text-main: #e4e6eb;
-                --text-muted: #b0b3b8;
-                --accent-color: #4da6ff;
-                --border-color: #3a3b3c;
-            }
-
-            /* Adaptação para manter o SVG do GitHub legível no tema escuro */
-            .stats-container img {
-                background-color: #f8f9fa;
-                border-radius: 8px;
-                padding: 10px;
-            }
+        .dark-mode {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --sidebar-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         * {
@@ -47,80 +44,173 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 20px;
+            display: flex;
+            min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
-        /* Container Principal */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--container-bg);
+        /* --- DASHBOARD LAYOUT --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            z-index: 100;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease;
+            max-width: 1000px;
         }
 
-        /* Tipografia e Alinhamento */
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 20px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+
+        /* --- SIDEBAR COMPONENTS --- */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-header h2 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        
+        .profile-header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link:hover {
+            background-color: var(--bg-main);
+            color: var(--accent-color);
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            margin-top: 20px;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* --- MAIN CONTENT COMPONENTS --- */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
         .text-center { text-align: center; }
         
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        h2 {
+        h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
+        
+        .section-title {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 20px;
             color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
-        h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        p { margin-bottom: 15px; }
-        
         .subtitle {
             color: var(--text-muted);
             font-style: italic;
             margin-bottom: 20px;
         }
 
-        /* Links de Idioma */
+        .lang-links {
+            background: var(--bg-card);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
         .lang-links a {
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s;
+            transition: opacity 0.2s;
         }
 
-        .lang-links a:hover {
-            color: #005582;
-            text-decoration: underline;
-        }
+        .lang-links a:hover { opacity: 0.7; }
 
-        @media (prefers-color-scheme: dark) {
-            .lang-links a:hover {
-                color: #80c4ff;
-            }
-        }
-
-        /* Badges e Imagens */
         .badges-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-top: 15px;
         }
 
         .badges-container img {
@@ -129,30 +219,26 @@
         }
 
         .badges-container a:hover img {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        /* Divisórias (Linhas horizontais) */
-        hr {
-            border: 0;
-            height: 1px;
-            background-color: var(--border-color);
-            margin: 40px 0;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Seções de Perfil */
-        .profile-section {
-            margin-bottom: 30px;
-        }
-
+        /* Listas */
         ul {
-            list-style-position: inside;
-            margin-left: 10px;
+            list-style-type: none;
         }
-
+        
         li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
         }
 
         /* Estatísticas do GitHub */
@@ -166,11 +252,10 @@
         .stats-container img {
             max-width: 100%;
             height: auto;
-            transition: background-color 0.3s ease;
+            border-radius: 8px;
         }
 
-        /* Responsividade para telas maiores */
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             .stats-container {
                 flex-direction: row;
                 justify-content: center;
@@ -180,26 +265,44 @@
 </head>
 <body>
 
-    <main class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="profile-header">
+            <h2>Johnathan Pereira</h2>
+            <p>Dev. de Sistemas & TI</p>
+        </div>
+        <nav class="nav-menu">
+            <a href="#home" class="nav-link">🏠 Home</a>
+            <a href="#tech-stack" class="nav-link">⚡ Tech Stack</a>
+            <a href="#repositories" class="nav-link">📁 Repositórios</a>
+            <a href="#education" class="nav-link">🎓 Formação (EN/PT)</a>
+            <a href="#analytics" class="nav-link">📊 Analytics</a>
+            <a href="#contact" class="nav-link">✉️ Contato</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle-btn">
+            <span id="theme-icon">🌙</span> Dark Mode
+        </button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
         <!-- Cabeçalho -->
-        <header class="text-center">
+        <div id="home" class="card text-center">
             <h1>Hello, World! I'm Johnathan Pereira</h1>
             <div class="subtitle">
                 <p>Information Technology | Systems Development<br>
                 Tecnologia da Informação | Desenvolvimento de Sistemas</p>
             </div>
-            
-            <p class="lang-links">
-                <i>Choose your language / Escolha seu idioma:</i><br>
+            <div class="lang-links">
+                <i>Choose your language:</i>
                 <a href="#english">English</a> | <a href="#portuguese">Português</a>
-            </p>
-        </header>
-
-        <hr>
+            </div>
+        </div>
 
         <!-- Tech Stack -->
-        <section class="text-center">
-            <h3>Tech Stack & Tools<br>Tecnologias & Ferramentas</h3>
+        <div id="tech-stack" class="card text-center">
+            <h2 class="section-title">Tech Stack & Tools</h2>
             <div class="badges-container">
                 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows" />
                 <img src="https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white" alt="Google Chrome" />
@@ -215,29 +318,26 @@
                 <img src="https://img.shields.io/badge/WSL-0a97f5?style=for-the-badge&logo=linux&logoColor=white" alt="WSL" />
                 <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
                 <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash" />
+                <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
             </div>
-        </section>
-
-        <hr>
+        </div>
 
         <!-- Repositórios em Destaque -->
-        <section class="text-center">
-            <h2>Featured Repositories<br>Repositórios em Destaque</h2>
+        <div id="repositories" class="card text-center">
+            <h2 class="section-title">Featured Repositories</h2>
             <div class="badges-container">
                 <a href="https://github.com/JohnathanWellPer/univesp-tecnologia_da_informacao" target="_blank">
-                    <img src="https://img.shields.io/badge/UNIVESP-Bachelor_of_Information_Technology-100000?style=for-the-badge&logo=github&logoColor=white" alt="UNIVESP Portfolio">
+                    <img src="https://img.shields.io/badge/UNIVESP-Bachelor_of_Information_Technology-E52207?style=for-the-badge&logo=github&logoColor=white" alt="UNIVESP Portfolio">
                 </a>
                 <a href="https://github.com/JohnathanWellPer/etec-desenvolvimento_de_sistemas" target="_blank">
-                    <img src="https://img.shields.io/badge/ETEC-Systems_Development_Technician-100000?style=for-the-badge&logo=github&logoColor=white" alt="ETEC Portfolio">
+                    <img src="https://img.shields.io/badge/ETEC-Systems_Development_Technician-C8102E?style=for-the-badge&logo=github&logoColor=white" alt="ETEC Portfolio">
                 </a>
             </div>
-        </section>
-
-        <hr>
+        </div>
 
         <!-- Seção English -->
-        <section id="english" class="profile-section">
-            <h2>Profile</h2>
+        <div id="education" class="card">
+            <h2 id="english" class="section-title">Profile (EN)</h2>
             <p><strong>Education:</strong></p>
             <ul>
                 <li><strong>Bachelor of Information Technology</strong> - UNIVESP</li>
@@ -245,13 +345,11 @@
                 <li><strong>Technical Degree in Commerce</strong> - ETEC</li>
                 <li><strong>Foundations of Generative AI (Google Cloud)</strong> - SENAI</li>
             </ul>
-        </section>
+            
+            <br><hr style="border:0; height:1px; background:var(--border-color); margin:20px 0;"><br>
 
-        <hr>
-
-        <!-- Seção Portuguese -->
-        <section id="portuguese" class="profile-section">
-            <h2>Perfil</h2>
+            <!-- Seção Portuguese -->
+            <h2 id="portuguese" class="section-title">Perfil (PT-BR)</h2>
             <p><strong>Formação Acadêmica:</strong></p>
             <ul>
                 <li><strong>Bacharelado em Tecnologia da Informação</strong> - UNIVESP</li>
@@ -259,24 +357,21 @@
                 <li><strong>Técnico em Comércio</strong> - ETEC</li>
                 <li><strong>Fundamentos de Inteligência Artificial Generativa (Google Cloud)</strong> - SENAI</li>
             </ul>
-        </section>
-
-        <hr>
+        </div>
 
         <!-- Estatísticas -->
-        <section class="text-center">
-            <h2>GitHub Stats<br>Estatísticas do GitHub</h2>
+        <div id="analytics" class="card text-center">
+            <h2 class="section-title">GitHub Stats & Analytics</h2>
             <div class="stats-container">
-                <img src="https://github-readme-stats.vercel.app/api?username=JohnathanWellPer&show_icons=true&theme=transparent&hide_border=true&title_color=0077B5&icon_color=0077B5&text_color=333333" alt="GitHub Stats" />
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=JohnathanWellPer&layout=compact&theme=transparent&hide_border=true&title_color=0077B5&text_color=333333" alt="Top Languages" />
+                <!-- Imagens controladas pelo JS para alterar entre o tema default (light) e dark -->
+                <img id="gh-stats" src="https://github-readme-stats-mu-two-29.vercel.app/api?username=JohnathanWellPer&show_icons=true&hide_border=true&title_color=0077B5&icon_color=0077B5&theme=default" alt="GitHub Stats" />
+                <img id="gh-langs" src="https://github-readme-stats-mu-two-29.vercel.app/api/top-langs/?username=JohnathanWellPer&layout=compact&hide_border=true&title_color=0077B5&theme=default" alt="Top Languages" />
             </div>
-        </section>
-
-        <hr>
+        </div>
 
         <!-- Contato -->
-        <section class="text-center">
-            <h3>Contact<br>Contato</h3>
+        <div id="contact" class="card text-center">
+            <h2 class="section-title">Contact / Contato</h2>
             <div class="badges-container">
                 <a href="https://www.linkedin.com/in/johnathanwellper/" target="_blank">
                     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
@@ -288,17 +383,66 @@
                     <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
                 </a>
             </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Script para Rolagem Suave -->
+    <!-- Scripts: Tema e Rolagem Suave -->
     <script>
+        // Lógica de Alternância de Tema (Dark/Light)
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+        
+        // Elementos das APIs do GitHub
+        const ghStats = document.getElementById('gh-stats');
+        const ghLangs = document.getElementById('gh-langs');
+        
+        // Base URLs da sua infraestrutura privada na Vercel
+        const baseUrlStats = "https://github-readme-stats-mu-two-29.vercel.app/api?username=JohnathanWellPer&show_icons=true&hide_border=true&title_color=0077B5&icon_color=0077B5";
+        const baseUrlLangs = "https://github-readme-stats-mu-two-29.vercel.app/api/top-langs/?username=JohnathanWellPer&layout=compact&hide_border=true&title_color=0077B5";
+
+        // Verifica a preferência do sistema operacional
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            enableDarkMode();
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+            toggleBtn.innerHTML = '<span id="theme-icon">☀️</span> Light Mode';
+            // Altera dinamicamente os parâmetros da API para o tema escuro
+            ghStats.src = baseUrlStats + "&theme=dark";
+            ghLangs.src = baseUrlLangs + "&theme=dark";
+        }
+
+        function disableDarkMode() {
+            body.classList.remove('dark-mode');
+            themeIcon.textContent = '🌙';
+            toggleBtn.innerHTML = '<span id="theme-icon">🌙</span> Dark Mode';
+            // Retorna a API para o tema claro
+            ghStats.src = baseUrlStats + "&theme=default";
+            ghLangs.src = baseUrlLangs + "&theme=default";
+        }
+
+        // Lógica de Rolagem Suave (Smooth Scroll)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                if (targetId === '#english' || targetId === '#portuguese') {
+                    // Ajuste de scroll para não ficar escondido atrás do cabeçalho caso precise
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
     </script>
